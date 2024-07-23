@@ -81,6 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                         MaterialPageRoute(
                             builder: (context) => const MainScreen()));
                   },
+                  color: Colors.yellow,
                 ),
                 const SizedBox(
                   height: 20,

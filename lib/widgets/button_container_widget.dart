@@ -10,7 +10,7 @@ class ButtonContainerWidget extends StatelessWidget {
   final VoidCallback? onTap;
   final bool? hasIcon;
   final IconData? icon;
-  const ButtonContainerWidget({Key? key, this.width=double.infinity, this.height=40, required this.title, this.onTap, this.hasIcon=false, this.icon}) : super(key: key);
+  const ButtonContainerWidget({Key? key, this.width=double.infinity, this.height=40, required this.title, this.onTap, this.hasIcon=false, this.icon, required MaterialColor color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

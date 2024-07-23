@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_prime_app/screens/auth/login_page.dart';
 import 'package:food_prime_app/screens/onboarding/onboarding_entity.dart';
-import 'package:food_prime_app/theme/style.dart';
+
 import 'package:food_prime_app/widgets/button_container_widget.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -25,76 +25,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               child: Column(
                 children: [
                   // Image.asset("assets/word_app_logo.png"),
-                  const SizedBox(
-                    height: 100,
-                  ),
-                  Image.asset("assets/${onBoardingData[index].image}"),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "${onBoardingData[index].title}",
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        fontSize: 22, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "${onBoardingData[index].description}",
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 10,
-                        height: 10,
-                        decoration: BoxDecoration(
-                            color:
-                                index == 0 ? primaryColorED6E1B : Colors.grey,
-                            shape: BoxShape.circle),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        width: 10,
-                        height: 10,
-                        decoration: BoxDecoration(
-                            color:
-                                index == 1 ? primaryColorED6E1B : Colors.grey,
-                            shape: BoxShape.circle),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        width: 10,
-                        height: 10,
-                        decoration: BoxDecoration(
-                            color:
-                                index == 2 ? primaryColorED6E1B : Colors.grey,
-                            shape: BoxShape.circle),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  index == 2
+
+                  index == 0
                       ? Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15.0),
                           child: ButtonContainerWidget(
-                            title: "Get Started",
+                            title: "pizza",
                             hasIcon: true,
                             icon: Icons.arrow_forward_ios,
                             onTap: () {
@@ -105,6 +41,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 (route) => false,
                               );
                             },
+                            color: Colors.yellow,
                           ),
                         )
                       : Container(),

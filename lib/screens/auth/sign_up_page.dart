@@ -96,6 +96,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         MaterialPageRoute(builder: (_) => const MainScreen()),
                         (route) => false);
                   },
+                  color: Colors.yellow,
                 ),
                 const SizedBox(
                   height: 20,

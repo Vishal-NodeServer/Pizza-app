@@ -16,111 +16,87 @@ class _FoodMainPageState extends State<FoodMainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: whiteColor,
-          leading: GestureDetector(
-              onTap: () => Navigator.pop(context),
-              child: const Icon(
-                Icons.arrow_back_ios,
-                color: Colors.black,
-              )),
-        ),
         body: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
               children: [
-                Row(
-                  children: [
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: const BoxDecoration(
-                        color: primaryColorED6E1B,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Center(
-                        child: Icon(
-                          Icons.settings_voice,
-                          color: whiteColor,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
                 const SizedBox(
-                  height: 30,
+                  width: 10,
                 ),
-                const Text(
-                  "Categories",
-                  style: TextStyle(fontSize: 16),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    _singleCategoryItemWidget(
-                        title: "Burger",
-                        color: _currentSelectedCategory == 0
-                            ? primaryColorED6E1B
-                            : Colors.grey[400],
-                        onTap: () {
-                          setState(() {
-                            _currentSelectedCategory = 0;
-                          });
-                        }),
-                    _singleCategoryItemWidget(
-                        title: "Pizza",
-                        color: _currentSelectedCategory == 1
-                            ? primaryColorED6E1B
-                            : Colors.grey[400],
-                        onTap: () {
-                          setState(() {
-                            _currentSelectedCategory = 1;
-                          });
-                        }),
-                    _singleCategoryItemWidget(
-                        title: "Sandwich",
-                        color: _currentSelectedCategory == 2
-                            ? primaryColorED6E1B
-                            : Colors.grey[400],
-                        onTap: () {
-                          setState(() {
-                            _currentSelectedCategory = 2;
-                          });
-                        }),
-                  ],
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                const Text(
-                  "Today Special Offer",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                _switchSpecialCategoryOnSelectedIndex(_currentSelectedCategory),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Text(
-                  "Popular Now",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                _switchPopularCategoryOnSelectedIndex(_currentSelectedCategory)
               ],
             ),
-          ),
-        ));
+            const SizedBox(
+              height: 30,
+            ),
+            const Text(
+              "Categories",
+              style: TextStyle(fontSize: 16),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _singleCategoryItemWidget(
+                    title: "Burger",
+                    color: _currentSelectedCategory == 0
+                        ? primaryColorED6E1B
+                        : Colors.grey[400],
+                    onTap: () {
+                      setState(() {
+                        _currentSelectedCategory = 0;
+                      });
+                    }),
+                _singleCategoryItemWidget(
+                    title: "Pizza",
+                    color: _currentSelectedCategory == 1
+                        ? primaryColorED6E1B
+                        : Colors.grey[400],
+                    onTap: () {
+                      setState(() {
+                        _currentSelectedCategory = 1;
+                      });
+                    }),
+                _singleCategoryItemWidget(
+                    title: "Sandwich",
+                    color: _currentSelectedCategory == 2
+                        ? primaryColorED6E1B
+                        : Colors.grey[400],
+                    onTap: () {
+                      setState(() {
+                        _currentSelectedCategory = 2;
+                      });
+                    }),
+              ],
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            const Text(
+              "Today Special Offer",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            _switchSpecialCategoryOnSelectedIndex(_currentSelectedCategory),
+            const SizedBox(
+              height: 20,
+            ),
+            const Text(
+              "Popular Now",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            _switchPopularCategoryOnSelectedIndex(_currentSelectedCategory)
+          ],
+        ),
+      ),
+    ));
   }
 
   _singleCategoryItemWidget({

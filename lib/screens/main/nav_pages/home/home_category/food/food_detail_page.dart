@@ -57,7 +57,8 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
               children: [
                 Text(
                   "${widget.data['title']}",
-                  style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 22, fontWeight: FontWeight.bold),
                 ),
                 Row(
                   children: [
@@ -201,10 +202,13 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                     const SnackBar(content: Text("Item added to cart")));
                 Navigator.pop(context);
               },
+              color: Colors.yellow,
             ),
           ],
         ),
       ),
     );
   }
+
+  Null get newMethod => null;
 }

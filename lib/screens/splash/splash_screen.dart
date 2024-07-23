@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food_prime_app/theme/style.dart';
 
 class SplashScreen extends StatefulWidget {
   final Widget child;
@@ -12,7 +11,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Future.delayed(const Duration(milliseconds: 2000)).then((value) {
+    Future.delayed(const Duration(milliseconds: 4000)).then((value) {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => widget.child),
@@ -24,9 +23,14 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primaryColorED6E1B,
+      backgroundColor: Colors.yellow,
       body: Center(
-        child: Image.asset("assets/app_logo.png"),
+        child: Image.asset(
+          "assets/pizza_logo.png",
+
+          width: 150.0, // Adjust this value as needed
+          height: 150.0, // Adjust this value as needed
+        ),
       ),
     );
   }
