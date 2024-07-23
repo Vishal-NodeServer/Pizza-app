@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:food_prime_app/screens/main/main_screen.dart';
-import 'package:food_prime_app/screens/payment/payment_screen.dart';
 import 'package:food_prime_app/theme/style.dart';
 import '../../../../widgets/button_container_widget.dart';
 import '../home/home_category/food/cart_provider.dart'; // Adjust path as needed
@@ -15,6 +14,88 @@ class CartPage extends StatelessWidget {
       builder: (context, cartProvider, child) {
         final cartItems = cartProvider.items;
 
+        var column = Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "${cartItems.length} items in the cart",
+              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: cartItems.length,
+                itemBuilder: (context, index) {
+                  return _itemCartWidget(
+                    index: index,
+                    item: cartItems[index],
+                    cartProvider: cartProvider,
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Items",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  "${cartItems.length}",
+                  style: const TextStyle(
+                      fontSize: 15, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            const SizedBox(height: 5),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Delivery Fee",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                ),
+                const Text(
+                  "\$0.00",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Container(
+              width: double.infinity,
+              height: 1,
+              color: Colors.grey[350],
+            ),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Total",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  "\$${cartProvider.total.toStringAsFixed(2)}",
+                  style: const TextStyle(
+                      fontSize: 15, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            const SizedBox(height: 30),
+            ButtonContainerWidget(
+              title: "Checkout",
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => MainScreen()),
+                );
+              },
+            ),
+            const SizedBox(height: 30),
+          ],
+        );
         return Scaffold(
           appBar: AppBar(
             backgroundColor: whiteColor,
@@ -31,93 +112,7 @@ class CartPage extends StatelessWidget {
           ),
           body: Container(
             margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "${cartItems.length} items in the cart",
-                  style: const TextStyle(
-                      fontSize: 15, fontWeight: FontWeight.bold),
-                ),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: cartItems.length,
-                    itemBuilder: (context, index) {
-                      return _itemCartWidget(
-                        index: index,
-                        item: cartItems[index],
-                        cartProvider: cartProvider,
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "Items",
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      "${cartItems.length}",
-                      style: const TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 5),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "Delivery Fee",
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                    ),
-                    const Text(
-                      "\$0.00",
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Container(
-                  width: double.infinity,
-                  height: 1,
-                  color: Colors.grey[350],
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "Total",
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      "\$${cartProvider.total.toStringAsFixed(2)}",
-                      style: const TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 30),
-                ButtonContainerWidget(
-                  title: "Checkout",
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => PaymentScreen()),
-                    );
-                  },
-                ),
-                const SizedBox(height: 30),
-              ],
-            ),
+            child: column,
           ),
         );
       },

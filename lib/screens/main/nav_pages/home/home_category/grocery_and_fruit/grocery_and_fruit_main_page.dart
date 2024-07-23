@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_prime_app/data/food_prime_data.dart';
 import 'package:food_prime_app/screens/main/nav_pages/home/home_category/food/food_detail_page.dart';
-import 'package:food_prime_app/screens/search/search_page.dart';
-import 'package:food_prime_app/widgets/search_widget.dart';
 
 import '../../../../../../theme/style.dart';
 
@@ -34,35 +32,6 @@ class _GroceryAndFruitMainPageState extends State<GroceryAndFruitMainPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Expanded(
-                  child: SearchWidget(onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const SearchPage()));
-                  }),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: const BoxDecoration(
-                    color: primaryColorED6E1B,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Center(
-                    child: Icon(
-                      Icons.settings_voice,
-                      color: whiteColor,
-                    ),
-                  ),
-                ),
-              ],
-            ),
             const SizedBox(
               height: 30,
             ),
