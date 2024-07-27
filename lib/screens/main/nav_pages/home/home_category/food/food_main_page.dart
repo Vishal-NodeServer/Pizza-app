@@ -43,7 +43,7 @@ class _FoodMainPageState extends State<FoodMainPage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 _singleCategoryItemWidget(
-                    title: "Burger",
+                    title: "Pizza",
                     color: _currentSelectedCategory == 0
                         ? primaryColorED6E1B
                         : Colors.grey[400],
@@ -53,7 +53,7 @@ class _FoodMainPageState extends State<FoodMainPage> {
                       });
                     }),
                 _singleCategoryItemWidget(
-                    title: "Pizza",
+                    title: "Classic Pizza",
                     color: _currentSelectedCategory == 1
                         ? primaryColorED6E1B
                         : Colors.grey[400],
@@ -63,7 +63,7 @@ class _FoodMainPageState extends State<FoodMainPage> {
                       });
                     }),
                 _singleCategoryItemWidget(
-                    title: "Sandwich",
+                    title: "Combo pack",
                     color: _currentSelectedCategory == 2
                         ? primaryColorED6E1B
                         : Colors.grey[400],
