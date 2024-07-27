@@ -9,7 +9,12 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('PiZZA App'),
+        title: Image.asset(
+          'assets/loggo.png',
+          height: 50,
+          width: 60,
+          fit: BoxFit.cover,
+        ),
         backgroundColor: Color.fromARGB(255, 0, 56, 102),
         leading: IconButton(
           onPressed: () {
