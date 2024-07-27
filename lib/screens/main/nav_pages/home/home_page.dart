@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('PiZZA App'),
-        backgroundColor: Colors.yellow,
+        backgroundColor: Color.fromARGB(255, 0, 56, 102),
         leading: IconButton(
           onPressed: () {
             // Navigator.pop(context);

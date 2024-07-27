@@ -13,19 +13,20 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  bool _rememberMeCheckValue = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-      // margin: const EdgeInsets.symmetric(horizontal: 20,vertical: 40),
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
       child: Column(
         children: [
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // const SizedBox(height: 140,),
+                const SizedBox(
+                  height: 80,
+                ),
                 const Text(
                   "Sign Up",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -48,42 +49,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 const FormContainerWidget(hintText: "Phone number"),
                 const SizedBox(
                   height: 20,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Checkbox(
-                      onChanged: (value) {
-                        setState(() {
-                          _rememberMeCheckValue = value!;
-                        });
-                      },
-                      value: _rememberMeCheckValue,
-                    ),
-                    Expanded(
-                      child: RichText(
-                        maxLines: 2,
-                        text: const TextSpan(
-                          text: "By signing up you accept the ",
-                          style: TextStyle(color: Colors.black),
-                          children: [
-                            TextSpan(
-                              text: "Team of service ",
-                              style: TextStyle(color: primaryColorED6E1B),
-                            ),
-                            TextSpan(
-                              text: "and ",
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            TextSpan(
-                              text: "Privacy Policy",
-                              style: TextStyle(color: primaryColorED6E1B),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
                 ),
                 const SizedBox(
                   height: 30,

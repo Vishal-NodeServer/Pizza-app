@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import '/screens/auth/login_page.dart'; // Ensure this path is correct
 
 class SplashScreen extends StatefulWidget {
-  final Widget child;
-  const SplashScreen({super.key, required this.child});
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -11,23 +11,23 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Future.delayed(const Duration(milliseconds: 4000)).then((value) {
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => widget.child),
-          (route) => false);
-    });
     super.initState();
+    Future.delayed(const Duration(milliseconds: 4000), () {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const LoginPage()),
+        (route) => false, // Removes all previous routes
+      );
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.yellow,
+      backgroundColor: const Color.fromARGB(255, 0, 56, 102),
       body: Center(
         child: Image.asset(
           "assets/pizza_logo.png",
-
           width: 150.0, // Adjust this value as needed
           height: 150.0, // Adjust this value as needed
         ),

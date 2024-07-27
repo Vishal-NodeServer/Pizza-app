@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:food_prime_app/screens/main/nav_pages/cart/cart_page.dart';
 import 'package:food_prime_app/screens/main/nav_pages/home/home_page.dart';
 import 'package:food_prime_app/theme/style.dart';
 
+import 'nav_pages/cart/cart_page.dart';
 import 'nav_pages/profile/profile_page.dart';
 
 class MainScreen extends StatefulWidget {

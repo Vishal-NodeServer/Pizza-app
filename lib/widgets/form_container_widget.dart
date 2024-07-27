@@ -1,12 +1,11 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:food_prime_app/theme/style.dart';
 
 class FormContainerWidget extends StatelessWidget {
   final String hintText;
   final TextEditingController? controller;
-  const FormContainerWidget({Key? key, required this.hintText, this.controller}) : super(key: key);
+  const FormContainerWidget({Key? key, required this.hintText, this.controller})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +19,8 @@ class FormContainerWidget extends StatelessWidget {
       ),
       child: TextFormField(
         controller: controller,
-        decoration: InputDecoration(
-            hintText: hintText,
-            border: InputBorder.none
-        ),
+        decoration:
+            InputDecoration(hintText: hintText, border: InputBorder.none),
       ),
     );
   }
