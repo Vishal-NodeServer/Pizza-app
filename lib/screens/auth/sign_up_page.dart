@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_prime_app/screens/auth/login_page.dart';
 import 'package:food_prime_app/screens/main/main_screen.dart';
-import 'package:food_prime_app/theme/style.dart';
 import 'package:food_prime_app/widgets/button_container_widget.dart';
 import 'package:food_prime_app/widgets/form_container_widget.dart';
 
@@ -85,7 +84,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   },
                   child: const Text(
                     "Log In",
-                    style: TextStyle(fontSize: 15, color: primaryColorED6E1B),
+                    style: TextStyle(
+                        fontSize: 15, color: Color.fromARGB(255, 0, 56, 102)),
                   ))
             ],
           ),

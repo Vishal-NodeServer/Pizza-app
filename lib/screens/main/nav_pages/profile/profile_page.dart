@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_prime_app/screens/auth/login_page.dart';
 import 'package:food_prime_app/screens/main/main_screen.dart';
-import 'package:food_prime_app/theme/style.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -62,7 +61,7 @@ class ProfilePage extends StatelessWidget {
             Container(
               width: double.infinity,
               height: 1,
-              color: Colors.grey[400],
+              color: Color.fromARGB(255, 233, 228, 228),
             ),
             const SizedBox(height: 20),
             const SizedBox(height: 15),
@@ -103,7 +102,7 @@ class ProfilePage extends StatelessWidget {
         height: 50,
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         decoration: BoxDecoration(
-          color: lightGreyColor,
+          color: const Color.fromARGB(255, 233, 228, 228),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(

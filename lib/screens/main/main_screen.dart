@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:food_prime_app/screens/main/nav_pages/home/home_page.dart';
-import 'package:food_prime_app/theme/style.dart';
 
 import 'nav_pages/cart/cart_page.dart';
 import 'nav_pages/profile/profile_page.dart';
@@ -24,8 +23,9 @@ class _MainScreenState extends State<MainScreen> {
             });
           },
           currentIndex: _currentPageIndex,
-          selectedItemColor: primaryColorED6E1B,
-          selectedLabelStyle: const TextStyle(color: primaryColorED6E1B),
+          selectedItemColor: Color.fromARGB(255, 0, 56, 102),
+          selectedLabelStyle:
+              const TextStyle(color: Color.fromARGB(255, 0, 56, 102)),
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
             BottomNavigationBarItem(

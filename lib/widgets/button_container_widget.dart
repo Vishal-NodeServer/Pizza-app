@@ -1,7 +1,4 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:food_prime_app/theme/style.dart';
 
 class ButtonContainerWidget extends StatelessWidget {
   final double? width;
@@ -10,7 +7,16 @@ class ButtonContainerWidget extends StatelessWidget {
   final VoidCallback? onTap;
   final bool? hasIcon;
   final IconData? icon;
-  const ButtonContainerWidget({Key? key, this.width=double.infinity, this.height=40, required this.title, this.onTap, this.hasIcon=false, this.icon, required MaterialColor color}) : super(key: key);
+  const ButtonContainerWidget(
+      {Key? key,
+      this.width = double.infinity,
+      this.height = 40,
+      required this.title,
+      this.onTap,
+      this.hasIcon = false,
+      this.icon,
+      required MaterialColor color})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,18 +26,32 @@ class ButtonContainerWidget extends StatelessWidget {
         width: width,
         height: height,
         decoration: BoxDecoration(
-          color: primaryColorED6E1B,
+          color: Color.fromARGB(255, 0, 56, 102),
           borderRadius: BorderRadius.circular(5),
         ),
         child: Center(
-          child: hasIcon == true? Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(title, style: const TextStyle(color: whiteColor),),
-              const SizedBox(width: 5,),
-              Icon(icon, color: whiteColor, size: 15,),
-            ],
-          ) : Text(title, style: const TextStyle(color: whiteColor),),
+          child: hasIcon == true
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Icon(
+                      icon,
+                      color: Colors.white,
+                      size: 15,
+                    ),
+                  ],
+                )
+              : Text(
+                  title,
+                  style: const TextStyle(color: Colors.white),
+                ),
         ),
       ),
     );

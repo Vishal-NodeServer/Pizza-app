@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food_prime_app/theme/style.dart';
 
 class FormContainerWidget extends StatelessWidget {
   final String hintText;
@@ -14,7 +13,7 @@ class FormContainerWidget extends StatelessWidget {
       width: double.infinity,
       height: 50,
       decoration: BoxDecoration(
-        color: lightGreyColor,
+        color: Color.fromARGB(255, 233, 228, 228),
         borderRadius: BorderRadius.circular(5),
       ),
       child: TextFormField(
