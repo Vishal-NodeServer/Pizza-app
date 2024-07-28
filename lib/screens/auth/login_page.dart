@@ -16,6 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 252, 252, 252),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -24,13 +25,15 @@ class _LoginPageState extends State<LoginPage> {
               // Image widget at the top
               Container(
                 alignment: Alignment.center,
-                margin: const EdgeInsets.only(bottom: 30),
+                margin: const EdgeInsets.only(bottom: 15, top: 5),
                 child: AspectRatio(
-                  aspectRatio: 1.2, // Adjust aspect ratio to fit your design
+                  aspectRatio: 0.9, // Adjust aspect ratio to fit your design
                   child: Image.asset(
-                    'assets/chef.png', // Path to your image
+                    'assets/loginimage.png', // Path to your image
                     fit: BoxFit
                         .cover, // Scale the image to fit within its container
+                    height: 13, // Adjust height as needed
+                    width: 15,
                   ),
                 ),
               ),
@@ -38,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 0),
                     const Text(
                       "Log In",
                       style:

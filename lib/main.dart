@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      // debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       title: "Pizza&Hungry",
       home: SplashScreen(), // SplashScreen will handle navigation to LoginPage
     );
