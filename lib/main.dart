@@ -1,17 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'screens/splash/splash_screen.dart'; // Update with the correct path
 
 void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => YourProvider(),
-      child: const MyApp(),
-    ),
-  );
+  runApp(const MyApp());
 }
-
-class YourProvider extends ChangeNotifier {}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -19,9 +11,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      debugShowCheckedModeBanner: false,
+      // debugShowCheckedModeBanner: false,
       title: "Pizza&Hungry",
-
       home: SplashScreen(), // SplashScreen will handle navigation to LoginPage
     );
   }
