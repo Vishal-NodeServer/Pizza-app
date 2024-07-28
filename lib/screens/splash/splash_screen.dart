@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: const Color.fromARGB(255, 0, 56, 102),
       body: Center(
         child: Image.asset(
-          "assets/splashclip.png",
+          "assets/loggo.png",
           width: 250.0, // Adjust this value as needed
           height: 250.0, // Adjust this value as needed
         ),
