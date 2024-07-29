@@ -21,112 +21,103 @@ class _SignUpPageState extends State<SignUpPage> {
       body: Stack(
         children: [
           // Background image at the bottom
-          Positioned(
-            top: 100,
-            bottom: 100,
-            left: 0,
-            right: 0,
+          Align(
+            alignment: Alignment.bottomCenter,
             child: Image.asset(
-              'assets/logoutpizza.png', // Path to your image
-              height: 100, // Adjust height as needed
-              width: 50, // Make the image cover the width of the screen
-              fit: BoxFit.cover, // Scale the image to cover the area
+              'assets/logoutpizza.png',
+              fit: BoxFit.cover,
+              width: MediaQuery.of(context).size.width,
+              height: 400, // Adjust height as needed
             ),
           ),
           // Form container
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-            child: Column(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 80),
-                      const Text(
-                        "Sign Up",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 20),
-                      _buildTextField(
-                        controller: username,
-                        hintText: "Username",
-                      ),
-                      const SizedBox(height: 20),
-                      _buildTextField(
-                        controller: email,
-                        hintText: "Email",
-                      ),
-                      const SizedBox(height: 20),
-                      _buildTextField(
-                        controller: password,
-                        hintText: "Password",
-                        obscureText: true,
-                      ),
-                      const SizedBox(height: 20),
-                      _buildTextField(
-                        controller: phone,
-                        hintText: "Phone number",
-                      ),
-                      const SizedBox(height: 30),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => const MainScreen(),
-                              ),
-                              (route) => false,
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            foregroundColor: Colors.white,
-                            backgroundColor: Color.fromARGB(255, 0, 56, 102),
-                            padding: const EdgeInsets.symmetric(vertical: 15),
-                            textStyle: const TextStyle(fontSize: 16),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          child: const Text("Sign Up"),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                    ],
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+              child: Column(
+                children: [
+                  const SizedBox(height: 100),
+                  const Text(
+                    "Sign Up",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "Already have an account? ",
-                      style: TextStyle(fontSize: 15, color: Colors.black),
-                    ),
-                    GestureDetector(
-                      onTap: () {
+                  const SizedBox(height: 20),
+                  _buildTextField(
+                    controller: username,
+                    hintText: "Username",
+                  ),
+                  const SizedBox(height: 20),
+                  _buildTextField(
+                    controller: email,
+                    hintText: "Email",
+                  ),
+                  const SizedBox(height: 20),
+                  _buildTextField(
+                    controller: password,
+                    hintText: "Password",
+                    obscureText: true,
+                  ),
+                  const SizedBox(height: 20),
+                  _buildTextField(
+                    controller: phone,
+                    hintText: "Phone number",
+                  ),
+                  const SizedBox(height: 30),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
                         Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => const LoginPage(),
+                            builder: (_) => const MainScreen(),
                           ),
-                          (route) => false,
+                              (route) => false,
                         );
                       },
-                      child: const Text(
-                        "Log In",
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Color.fromARGB(255, 0, 56, 102),
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: const Color.fromARGB(255, 0, 56, 102),
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        textStyle: const TextStyle(fontSize: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
                       ),
+                      child: const Text("Sign Up"),
                     ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-              ],
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Already have an account? ",
+                        style: TextStyle(fontSize: 15, color: Colors.black),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const LoginPage(),
+                            ),
+                                (route) => false,
+                          );
+                        },
+                        child: const Text(
+                          "Log In",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Color.fromARGB(255, 8, 36, 110),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                ],
+              ),
             ),
           ),
         ],
