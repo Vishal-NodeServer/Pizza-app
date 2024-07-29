@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:food_prime_app/screens/auth/login_page.dart';
 import 'package:food_prime_app/screens/main/main_screen.dart';
 
@@ -11,7 +12,10 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 0, 56, 102),
         centerTitle: true,
-        title: const Text("Profile"),
+        title: const Text(
+          "Profile",
+          style: TextStyle(color: Colors.yellow),
+        ),
         leading: IconButton(
           onPressed: () {
             Navigator.push(

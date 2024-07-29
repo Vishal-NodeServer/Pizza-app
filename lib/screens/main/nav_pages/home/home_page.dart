@@ -21,7 +21,9 @@ class HomePage extends StatelessWidget {
             const Text(
               "PIZZA&HUNGRY",
               style: TextStyle(
-                  fontSize: 20), // You can adjust the text style as needed
+                  fontSize: 20,
+                  color:
+                      Colors.yellow), // You can adjust the text style as needed
             ),
           ],
         ),

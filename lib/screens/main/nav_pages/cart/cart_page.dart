@@ -15,7 +15,11 @@ class _cartMainPageState extends State<CartPage> {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 0, 56, 102),
         centerTitle: true,
-        title: const Text("Cart"),
+        title: const Text(
+          "Cart",
+          style:
+              TextStyle(color: Colors.yellow), // Change the text color to white
+        ),
         leading: IconButton(
           onPressed: () {
             Navigator.push(
@@ -23,7 +27,9 @@ class _cartMainPageState extends State<CartPage> {
               MaterialPageRoute(builder: (context) => const MainScreen()),
             );
           },
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(
+            Icons.arrow_back,
+          ), // Change the icon color to white
         ),
       ),
       body: Container(
