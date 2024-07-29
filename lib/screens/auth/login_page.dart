@@ -21,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
           // Background image
           Positioned.fill(
             child: Image.asset(
-              'assets/login_bg.jpg', // Path to your image
+              'assets/login_bg2.jpg', // Path to your image
               fit: BoxFit.cover, // Ensures the image covers the entire screen
             ),
           ),
