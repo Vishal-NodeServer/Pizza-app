@@ -96,5 +96,6 @@ flutter:
     - assets/chef.png
     - assets/logoutpizza.png
     - assets/loginimage.png
-    - assets/login_bg.jpg
+    - assets/1.jpg
     - assets/login_bg2.jpg
+    - assets/empty_cart.png
