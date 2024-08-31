@@ -1,41 +1,274 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:food_prime_app/screens/main/main_screen.dart';
+import 'package:food_prime_app/theme/style.dart';
+import '../home/home_category/food/cart_provider.dart'; // Adjust path as needed
 
-class CartPage extends StatefulWidget {
+class CartPage extends StatelessWidget {
   const CartPage({super.key});
 
   @override
-  State<CartPage> createState() => _cartMainPageState();
+  Widget build(BuildContext context) {
+    return Consumer<CartProvider>(
+      builder: (context, cartProvider, child) {
+        final cartItems = cartProvider.items;
+
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: whiteColor,
+            title: Image.asset("assets/loggo.png"),
+            leading: IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MainScreen()),
+                );
+              },
+              icon: const Icon(Icons.arrow_back_ios),
+            ),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "${cartItems.length} items in the cart",
+                  style: const TextStyle(
+                      fontSize: 15, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 10),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: cartItems.length,
+                    itemBuilder: (context, index) {
+                      return _itemCartWidget(
+                        index: index,
+                        item: cartItems[index],
+                        cartProvider: cartProvider,
+                      );
+                    },
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Items",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "${cartItems.length}",
+                      style: const TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Delivery Fee",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    ),
+                    const Text(
+                      "\$0.00",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Container(
+                  width: double.infinity,
+                  height: 1,
+                  color: Colors.grey[350],
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Total",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "\$${cartProvider.total.toStringAsFixed(2)}",
+                      style: const TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 30),
+                ButtonContainerWidget(
+                  title: "Checkout",
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => MainScreen()),
+                    );
+                  },
+                  color: Colors.yellow,
+                ),
+                const SizedBox(height: 30),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _itemCartWidget({
+    required int index,
+    required CartItem item,
+    required CartProvider cartProvider,
+  }) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+      margin: const EdgeInsets.only(bottom: 10),
+      decoration: BoxDecoration(
+        color: whiteColor,
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            offset: const Offset(0, 2),
+            spreadRadius: 1.5,
+            blurRadius: 6.5,
+            color: Colors.grey[300]!,
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Image.asset(
+            "assets/${item.image}",
+            width: 80,
+            height: 80,
+            fit: BoxFit.cover,
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      child: Text(
+                        item.title,
+                        style: const TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.w500),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () => cartProvider.removeItem(index),
+                      child: Container(
+                        width: 30,
+                        height: 20,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: lightGreyColor,
+                        ),
+                        child: const Center(
+                          child: Icon(
+                            Icons.close,
+                            color: primaryColorED6E1B,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const Text("Times Food"),
+                const SizedBox(height: 5),
+                Text(
+                  "\$${item.price.toStringAsFixed(2)}",
+                  style: const TextStyle(fontWeight: FontWeight.w600),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        if (item.quantity > 1) {
+                          cartProvider.updateQuantity(index, item.quantity - 1);
+                        }
+                      },
+                      child: Container(
+                        width: 30,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(width: 1),
+                        ),
+                        child: const Center(
+                          child: Icon(Icons.remove_outlined),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Text("${item.quantity}"),
+                    const SizedBox(width: 10),
+                    GestureDetector(
+                      onTap: () =>
+                          cartProvider.updateQuantity(index, item.quantity + 1),
+                      child: Container(
+                        width: 30,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(width: 1),
+                        ),
+                        child: const Center(
+                          child: Icon(Icons.add),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
-class _cartMainPageState extends State<CartPage> {
+class ButtonContainerWidget extends StatelessWidget {
+  final String title;
+  final VoidCallback onTap;
+  final Color color;
+
+  const ButtonContainerWidget({
+    Key? key,
+    required this.title,
+    required this.onTap,
+    required this.color,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 0, 56, 102),
-        centerTitle: true,
-        title: const Text(
-          "Cart",
-          style:
-              TextStyle(color: Colors.yellow), // Change the text color to white
+    return Container(
+      width: double.infinity,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: color,
+          padding: const EdgeInsets.symmetric(vertical: 15),
         ),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const MainScreen()),
-            );
-          },
-          icon: const Icon(
-            Icons.arrow_back,
-          ), // Change the icon color to white
-        ),
-      ),
-      body: Container(
-        // Your layout code here
-        child: Center(
-          child: Text('Welcome to Cart page'),
+        onPressed: onTap,
+        child: Text(
+          title,
+          style: const TextStyle(fontSize: 16),
         ),
       ),
     );
