@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_prime_app/screens/auth/login_page.dart';
-import 'package:food_prime_app/screens/main/main_screen.dart';
+// ignore: depend_on_referenced_packages
+import 'package:food_prime_app/screens/main/nav_pages/home/home_category/Address.dart'; //import the Address.dart file
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -67,12 +68,12 @@ class _SignUpPageState extends State<SignUpPage> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushAndRemoveUntil(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => const MainScreen(),
+                            builder: (_) =>
+                                AddressForm(), // Navigate to the Address Form
                           ),
-                              (route) => false,
                         );
                       },
                       style: ElevatedButton.styleFrom(
@@ -102,14 +103,15 @@ class _SignUpPageState extends State<SignUpPage> {
                             MaterialPageRoute(
                               builder: (_) => const LoginPage(),
                             ),
-                                (route) => false,
+                            (route) => false,
                           );
                         },
                         child: const Text(
                           "Log In",
                           style: TextStyle(
-                            fontSize: 15,
-                            color: Color.fromARGB(255, 8, 36, 110),
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold, //bold text
+                            color: Color.fromARGB(255, 0, 0, 0),
                           ),
                         ),
                       ),

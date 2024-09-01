@@ -43,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 0, 56, 102),
+                          color: Color.fromARGB(255, 255, 255, 255),
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -71,8 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                           },
                           style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.white,
-                            backgroundColor:
-                                const Color.fromARGB(255, 0, 56, 102),
+                            backgroundColor: Color.fromARGB(255, 0, 27, 49),
                             padding: EdgeInsets.symmetric(
                               vertical:
                                   MediaQuery.of(context).size.height * 0.02,
@@ -134,7 +133,8 @@ class _LoginPageState extends State<LoginPage> {
                               "Create account",
                               style: TextStyle(
                                 fontSize: 15,
-                                color: Color.fromARGB(255, 231, 70, 70),
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 255, 255, 255),
                                 shadows: [
                                   Shadow(
                                     blurRadius: 7.0, // Shadow blur radius
