@@ -17,12 +17,14 @@ class CartPage extends StatelessWidget {
         final total =
             cartProvider.total + deliveryFee; // Include delivery fee in total
 
-        // Get item titles
-        final itemTitles = cartItems.map((item) => item.title).toList();
+        // Get item titles and quantities
+        final itemDetails =
+            cartItems.map((item) => "${item.title}: ${item.quantity}").toList();
 
         // Print the item titles and total count to the terminal
-        print("Selected pizza titles: ${itemTitles.join(', ')}");
-        print("Total items selected: ${cartItems.length}");
+        print(
+            "Selected pizza titles and quantities: ${itemDetails.join(', ')}");
+        print("Total unique items selected: ${cartItems.length}");
 
         return Scaffold(
           appBar: AppBar(
@@ -44,7 +46,7 @@ class CartPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${cartItems.length} items in the cart",
+                  "${cartItems.length} unique items in the cart",
                   style: const TextStyle(
                       fontSize: 15, fontWeight: FontWeight.bold),
                 ),
@@ -88,8 +90,8 @@ class CartPage extends StatelessWidget {
                     ),
                     Text(
                       "₹${deliveryFee.toStringAsFixed(2)}", // Delivery fee
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -119,6 +121,17 @@ class CartPage extends StatelessWidget {
                 ButtonContainerWidget(
                   title: "Checkout",
                   onTap: () {
+                    // Print cart items and total when checkout is clicked
+                    print("Checkout button clicked!");
+                    print("Items in the cart:");
+                    for (var item in cartItems) {
+                      print(
+                          "Item: ${item.title}, Quantity: ${item.quantity}, Price: ₹${item.price * item.quantity}");
+                    }
+                    print("Delivery Fee: ₹${deliveryFee.toStringAsFixed(2)}");
+                    print("Total Amount: ₹${total.toStringAsFixed(2)}");
+
+                    // Navigate to the main screen after checkout
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (_) => MainScreen()),
@@ -140,6 +153,9 @@ class CartPage extends StatelessWidget {
     required CartItem item,
     required CartProvider cartProvider,
   }) {
+    // Print the title and quantity of each item
+    print("Item: ${item.title}, Quantity: ${item.quantity}");
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
@@ -230,7 +246,7 @@ class CartPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 10),
-                    Text("${item.quantity}"),
+                    Text("${item.quantity}"), // Display item quantity
                     const SizedBox(width: 10),
                     GestureDetector(
                       onTap: () {
