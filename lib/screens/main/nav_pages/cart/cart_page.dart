@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_prime_app/screens/main/nav_pages/home/home_category/food/food_detail_page.dart';
 import 'package:provider/provider.dart';
 import 'package:food_prime_app/screens/main/main_screen.dart';
 import 'package:food_prime_app/theme/style.dart';
@@ -12,6 +13,16 @@ class CartPage extends StatelessWidget {
     return Consumer<CartProvider>(
       builder: (context, cartProvider, child) {
         final cartItems = cartProvider.items;
+        final deliveryFee = 50.00; // Define your delivery fee here
+        final total =
+            cartProvider.total + deliveryFee; // Include delivery fee in total
+
+        // Get item titles
+        final itemTitles = cartItems.map((item) => item.title).toList();
+
+        // Print the item titles and total count to the terminal
+        print("Selected pizza titles: ${itemTitles.join(', ')}");
+        print("Total items selected: ${cartItems.length}");
 
         return Scaffold(
           appBar: AppBar(
@@ -75,8 +86,8 @@ class CartPage extends StatelessWidget {
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     ),
-                    const Text(
-                      "\$0.00",
+                    Text(
+                      "₹${deliveryFee.toStringAsFixed(2)}", // Delivery fee
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     ),
@@ -98,7 +109,7 @@ class CartPage extends StatelessWidget {
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "\$${cartProvider.total.toStringAsFixed(2)}",
+                      "₹${total.toStringAsFixed(2)}", // Total including delivery fee
                       style: const TextStyle(
                           fontSize: 15, fontWeight: FontWeight.bold),
                     ),
@@ -191,7 +202,7 @@ class CartPage extends StatelessWidget {
                 const Text("Times Food"),
                 const SizedBox(height: 5),
                 Text(
-                  "\$${item.price.toStringAsFixed(2)}",
+                  "₹${item.price.toStringAsFixed(2)}", // Changed to ₹ symbol
                   style: const TextStyle(fontWeight: FontWeight.w600),
                 ),
                 Row(
@@ -201,6 +212,9 @@ class CartPage extends StatelessWidget {
                       onTap: () {
                         if (item.quantity > 1) {
                           cartProvider.updateQuantity(index, item.quantity - 1);
+                          // Print the updated item quantity
+                          print(
+                              "Updated ${item.title} quantity: ${item.quantity - 1}");
                         }
                       },
                       child: Container(
@@ -219,8 +233,12 @@ class CartPage extends StatelessWidget {
                     Text("${item.quantity}"),
                     const SizedBox(width: 10),
                     GestureDetector(
-                      onTap: () =>
-                          cartProvider.updateQuantity(index, item.quantity + 1),
+                      onTap: () {
+                        cartProvider.updateQuantity(index, item.quantity + 1);
+                        // Print the updated item quantity
+                        print(
+                            "Updated ${item.title} quantity: ${item.quantity + 1}");
+                      },
                       child: Container(
                         width: 30,
                         height: 30,
@@ -239,37 +257,6 @@ class CartPage extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class ButtonContainerWidget extends StatelessWidget {
-  final String title;
-  final VoidCallback onTap;
-  final Color color;
-
-  const ButtonContainerWidget({
-    Key? key,
-    required this.title,
-    required this.onTap,
-    required this.color,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: color,
-          padding: const EdgeInsets.symmetric(vertical: 15),
-        ),
-        onPressed: onTap,
-        child: Text(
-          title,
-          style: const TextStyle(fontSize: 16),
-        ),
       ),
     );
   }

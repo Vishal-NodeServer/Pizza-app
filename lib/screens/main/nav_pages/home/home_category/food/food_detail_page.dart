@@ -15,7 +15,7 @@ class FoodDetailPage extends StatefulWidget {
 
 class _FoodDetailPageState extends State<FoodDetailPage> {
   int _quantity = 1;
-  final int price = 80;
+  final int price = 80; // Example price in INR
 
   int get total => price * _quantity;
 
@@ -180,7 +180,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "\$ $total",
+              "₹ $total", // Changed to ₹ symbol and updated total calculation
               style: const TextStyle(fontSize: 16),
             ),
             ButtonContainerWidget(
