@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:Pizza_app/data/food_prime_data.dart';
+import 'package:Pizza_app/data/food_data.dart';
 import 'package:Pizza_app/screens/main/nav_pages/home/home_category/food/food_detail_page.dart';
 import '../../../../../../theme/style.dart';
 
@@ -132,7 +132,7 @@ class _FoodMainPageState extends State<FoodMainPage> {
 
   _buildSpecialBurgerList() {
     return _buildFoodList(
-      BURGER_SPECIAL_CATEGORY_LIST,
+      PIZZA_POPULAR_LIST,
       deliveryFee: 5,
       deliveryTime: "20 - 40 min",
       price: 100, // Changed to ₹100
@@ -141,7 +141,7 @@ class _FoodMainPageState extends State<FoodMainPage> {
 
   _buildSpecialPizzaList() {
     return _buildFoodList(
-      PIZZA_SPECIAL_CATEGORY_LIST,
+      PIZZA_SPECIAL_LIST,
       deliveryFee: 50,
       deliveryTime: "20 - 40 min",
       price: 250, // Changed to ₹250
@@ -150,7 +150,7 @@ class _FoodMainPageState extends State<FoodMainPage> {
 
   _buildSpecialSandwichList() {
     return _buildFoodList(
-      SANDWICH_SPECIAL_CATEGORY_LIST,
+      PIZZA_SPECIAL_COMBO_LIST,
       deliveryFee: 50,
       deliveryTime: "20 - 40 min",
       price: 150, // Changed to ₹150
@@ -171,21 +171,21 @@ class _FoodMainPageState extends State<FoodMainPage> {
 
   _buildPopularBurgerList() {
     return _buildPopularFoodList(
-      BURGER_POPULAR_CATEGORY_LIST,
+      PIZZA_SPECIAL_COMBO_LIST,
       price: 100, // Changed to ₹100
     );
   }
 
   _buildPopularPizzaList() {
     return _buildPopularFoodList(
-      PIZZA_POPULAR_CATEGORY_LIST,
+      PIZZA_POPULAR_COMBO_LIST,
       price: 250, // Changed to ₹250
     );
   }
 
   _buildPopularSandwichList() {
     return _buildPopularFoodList(
-      SANDWICH_POPULAR_CATEGORY_LIST,
+      BEVERAGE_SPECIAL_LIST,
       price: 150, // Changed to ₹150
     );
   }

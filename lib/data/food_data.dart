@@ -1,6 +1,6 @@
 /// ! Home Category 2
 
-final BURGER_SPECIAL_CATEGORY_LIST = [
+final PIZZA_POPULAR_LIST = [
   {
     "image": "7cheese.jpg", // Replaced
     "title": "7cheese Pizza",
@@ -18,7 +18,7 @@ final BURGER_SPECIAL_CATEGORY_LIST = [
   },
 ];
 
-final BURGER_POPULAR_CATEGORY_LIST = [
+final PIZZA_SPECIAL_LIST = [
   {
     "image": "corn.jpg", // Replaced
     "title": "Corn Pizza",
@@ -35,14 +35,14 @@ final BURGER_POPULAR_CATEGORY_LIST = [
   {"image": "veggie.jpg", "title": "Veggie Pizza", "rating": "4.5"},
 ];
 
-final PIZZA_SPECIAL_CATEGORY_LIST = [
+final PIZZA_SPECIAL_COMBO_LIST = [
   {"image": "combo_1.jpg", "title": "Neapolitan Pizza", "rating": "4.9"},
   {"image": "loggo.png", "title": "Chicago Pizza", "rating": "5.0"},
   {"image": "loggo.png", "title": "New York-Style Pizza", "rating": "5.0"},
   {"image": "loggo.png", "title": "Sicilian Pizza", "rating": "4.2"},
 ];
 
-final PIZZA_POPULAR_CATEGORY_LIST = [
+final PIZZA_POPULAR_COMBO_LIST = [
   {"image": "combo_1.jpg", "title": "Greek Pizza", "rating": "4.2"},
   {"image": "combo_2.jpg", "title": "California Pizza", "rating": "3.7"},
   {"image": "combo_3.jpg", "title": "Detroit Pizza", "rating": "4.9"},
@@ -53,7 +53,7 @@ final PIZZA_POPULAR_CATEGORY_LIST = [
   {"image": "combo_8.jpg", "title": "Meat Pizza", "rating": "5.0"},
 ];
 
-final SANDWICH_SPECIAL_CATEGORY_LIST = [
+final BEVERAGE_SPECIAL_LIST = [
   {
     "image": "loggo.png", // Replaced
     "title": "Chicken Sandwich",
@@ -76,7 +76,7 @@ final SANDWICH_SPECIAL_CATEGORY_LIST = [
   },
 ];
 
-final SANDWICH_POPULAR_CATEGORY_LIST = [
+final BEVERAGE_POPULAR_LIST = [
   {
     "image": "cocacola.jpg", // Replaced
     "title": "Coca Cola",
