@@ -122,15 +122,15 @@ class _FoodMainPageState extends State<FoodMainPage> {
   _switchSpecialCategoryOnSelectedIndex(int index) {
     switch (index) {
       case 0:
-        return _buildSpecialBurgerList();
-      case 1:
         return _buildSpecialPizzaList();
+      case 1:
+        return _buildSpecialComboPizzaList();
       case 2:
-        return _buildSpecialSandwichList();
+        return _buildSpecialBeverageList();
     }
   }
 
-  _buildSpecialBurgerList() {
+  _buildSpecialPizzaList() {
     return _buildFoodList(
       PIZZA_POPULAR_LIST,
       deliveryFee: 5,
@@ -139,7 +139,7 @@ class _FoodMainPageState extends State<FoodMainPage> {
     );
   }
 
-  _buildSpecialPizzaList() {
+  _buildSpecialComboPizzaList() {
     return _buildFoodList(
       PIZZA_SPECIAL_LIST,
       deliveryFee: 50,
@@ -148,7 +148,7 @@ class _FoodMainPageState extends State<FoodMainPage> {
     );
   }
 
-  _buildSpecialSandwichList() {
+  _buildSpecialBeverageList() {
     return _buildFoodList(
       PIZZA_SPECIAL_COMBO_LIST,
       deliveryFee: 50,
@@ -161,29 +161,29 @@ class _FoodMainPageState extends State<FoodMainPage> {
   _switchPopularCategoryOnSelectedIndex(int index) {
     switch (index) {
       case 0:
-        return _buildPopularBurgerList();
-      case 1:
         return _buildPopularPizzaList();
+      case 1:
+        return buildPopularComboPizzaList();
       case 2:
-        return _buildPopularSandwichList();
+        return _buildPopularBeverageList();
     }
   }
 
-  _buildPopularBurgerList() {
+  _buildPopularPizzaList() {
     return _buildPopularFoodList(
       PIZZA_SPECIAL_COMBO_LIST,
       price: 100, // Changed to ₹100
     );
   }
 
-  _buildPopularPizzaList() {
+  buildPopularComboPizzaList() {
     return _buildPopularFoodList(
       PIZZA_POPULAR_COMBO_LIST,
       price: 250, // Changed to ₹250
     );
   }
 
-  _buildPopularSandwichList() {
+  _buildPopularBeverageList() {
     return _buildPopularFoodList(
       BEVERAGE_SPECIAL_LIST,
       price: 150, // Changed to ₹150
