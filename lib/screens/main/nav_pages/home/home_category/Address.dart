@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_prime_app/screens/auth/sign_up_page.dart'; // Import the SignUpPage
-import 'package:food_prime_app/screens/main/main_screen.dart'; // Import main page
+import 'package:Pizza_app/screens/auth/sign_up_page.dart'; // Import the SignUpPage
+import 'package:Pizza_app/screens/main/main_screen.dart'; // Import main page
 
 class AddressForm extends StatefulWidget {
   @override

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:food_prime_app/screens/auth/login_page.dart';
+import 'package:Pizza_app/screens/auth/login_page.dart';
 // ignore: depend_on_referenced_packages
-import 'package:food_prime_app/screens/main/nav_pages/home/home_category/Address.dart'; //import the Address.dart file
+import 'package:Pizza_app/screens/main/nav_pages/home/home_category/Address.dart'; //import the Address.dart file
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});

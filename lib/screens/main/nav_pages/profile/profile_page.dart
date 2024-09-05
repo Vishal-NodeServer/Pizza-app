@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:food_prime_app/screens/auth/login_page.dart';
-import 'package:food_prime_app/screens/main/main_screen.dart';
+import 'package:Pizza_app/screens/auth/login_page.dart';
+import 'package:Pizza_app/screens/main/main_screen.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});

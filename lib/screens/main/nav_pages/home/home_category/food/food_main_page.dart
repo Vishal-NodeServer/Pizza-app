@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_prime_app/data/food_prime_data.dart';
-import 'package:food_prime_app/screens/main/nav_pages/home/home_category/food/food_detail_page.dart';
+import 'package:Pizza_app/data/food_prime_data.dart';
+import 'package:Pizza_app/screens/main/nav_pages/home/home_category/food/food_detail_page.dart';
 import '../../../../../../theme/style.dart';
 
 class FoodMainPage extends StatefulWidget {
@@ -73,7 +73,7 @@ class _FoodMainPageState extends State<FoodMainPage> {
               ),
               const SizedBox(height: 15),
               const Text(
-                "Today Special Offer",
+                "Special",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 20),
