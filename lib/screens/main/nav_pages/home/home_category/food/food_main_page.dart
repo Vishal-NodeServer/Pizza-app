@@ -22,11 +22,6 @@ class _FoodMainPageState extends State<FoodMainPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  const SizedBox(width: 10),
-                ],
-              ),
               const SizedBox(height: 30),
               const Text(
                 "Categories",
@@ -84,6 +79,12 @@ class _FoodMainPageState extends State<FoodMainPage> {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               _switchPopularCategoryOnSelectedIndex(_currentSelectedCategory),
+              const SizedBox(height: 20),
+              const Text(
+                "More Items",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              _switchVerticalListOnSelectedIndex(_currentSelectedCategory),
             ],
           ),
         ),
@@ -122,83 +123,36 @@ class _FoodMainPageState extends State<FoodMainPage> {
   _switchSpecialCategoryOnSelectedIndex(int index) {
     switch (index) {
       case 0:
-        return _buildSpecialPizzaList();
+        return _buildFoodList(
+          PIZZA_POPULAR_LIST,
+          deliveryFee: 50,
+          deliveryTime: "20 - 40 min",
+        );
       case 1:
-        return _buildSpecialComboPizzaList();
+        return _buildFoodList(
+          PIZZA_SPECIAL_LIST,
+          deliveryFee: 50,
+          deliveryTime: "20 - 40 min",
+        );
       case 2:
-        return _buildSpecialBeverageList();
+        return _buildFoodList(
+          PIZZA_SPECIAL_COMBO_LIST,
+          deliveryFee: 50,
+          deliveryTime: "20 - 40 min",
+        );
     }
   }
 
-  _buildSpecialPizzaList() {
-    return _buildFoodList(
-      PIZZA_POPULAR_LIST,
-      deliveryFee: 5,
-      deliveryTime: "20 - 40 min",
-      price: 100, // Changed to ₹100
-    );
-  }
-
-  _buildSpecialComboPizzaList() {
-    return _buildFoodList(
-      PIZZA_SPECIAL_LIST,
-      deliveryFee: 50,
-      deliveryTime: "20 - 40 min",
-      price: 250, // Changed to ₹250
-    );
-  }
-
-  _buildSpecialBeverageList() {
-    return _buildFoodList(
-      PIZZA_SPECIAL_COMBO_LIST,
-      deliveryFee: 50,
-      deliveryTime: "20 - 40 min",
-      price: 150, // Changed to ₹150
-    );
-  }
-
-  // SWITCH POPULAR LIST
-  _switchPopularCategoryOnSelectedIndex(int index) {
-    switch (index) {
-      case 0:
-        return _buildPopularPizzaList();
-      case 1:
-        return buildPopularComboPizzaList();
-      case 2:
-        return _buildPopularBeverageList();
-    }
-  }
-
-  _buildPopularPizzaList() {
-    return _buildPopularFoodList(
-      PIZZA_SPECIAL_COMBO_LIST,
-      price: 100, // Changed to ₹100
-    );
-  }
-
-  buildPopularComboPizzaList() {
-    return _buildPopularFoodList(
-      PIZZA_POPULAR_COMBO_LIST,
-      price: 250, // Changed to ₹250
-    );
-  }
-
-  _buildPopularBeverageList() {
-    return _buildPopularFoodList(
-      BEVERAGE_SPECIAL_LIST,
-      price: 150, // Changed to ₹150
-    );
-  }
-
+  // Build food list for Special category
   _buildFoodList(List foodList,
-      {required int deliveryFee,
-      required String deliveryTime,
-      required int price}) {
+      {required int deliveryFee, required String deliveryTime}) {
     return SizedBox(
       height: 250,
-      child: ListView(
+      child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        children: foodList.map((foodItem) {
+        itemCount: foodList.length,
+        itemBuilder: (context, index) {
+          var foodItem = foodList[index];
           return GestureDetector(
             onTap: () {
               Navigator.push(
@@ -208,18 +162,24 @@ class _FoodMainPageState extends State<FoodMainPage> {
                 ),
               );
             },
-            child: SizedBox(
-              width: 300,
+            child: Container(
+              margin: const EdgeInsets.only(
+                  right: 10), // Adds spacing between the items
+              width: 300, // Fixes the width of each item
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
+                    width: double.infinity,
+                    height: 150,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Image.asset(
-                      "assets/${foodItem['image']}",
-                      fit: BoxFit.cover,
+                      borderRadius:
+                          BorderRadius.circular(15), // Rounded corners
+                      image: DecorationImage(
+                        image: AssetImage("assets/${foodItem['image']}"),
+                        fit: BoxFit
+                            .cover, // Ensure the image covers the container
+                      ),
                     ),
                   ),
                   const SizedBox(height: 5),
@@ -235,7 +195,7 @@ class _FoodMainPageState extends State<FoodMainPage> {
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            "\₹$deliveryFee Delivery Fee $deliveryTime",
+                            "\₹${foodItem['price']} Delivery Fee $deliveryFee, $deliveryTime",
                             style: TextStyle(color: Colors.grey[700]),
                           ),
                         ],
@@ -258,17 +218,32 @@ class _FoodMainPageState extends State<FoodMainPage> {
               ),
             ),
           );
-        }).toList(),
+        },
       ),
     );
   }
 
-  _buildPopularFoodList(List foodList, {required int price}) {
+  // SWITCH POPULAR LIST
+  _switchPopularCategoryOnSelectedIndex(int index) {
+    switch (index) {
+      case 0:
+        return _buildPopularFoodList(PIZZA_POPULAR_LIST);
+      case 1:
+        return _buildPopularFoodList(PIZZA_SPECIAL_COMBO_LIST);
+      case 2:
+        return _buildPopularFoodList(BEVERAGE_SPECIAL_LIST);
+    }
+  }
+
+  // Build food list for Popular category
+  _buildPopularFoodList(List foodList) {
     return SizedBox(
       height: 200,
-      child: ListView(
+      child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        children: foodList.map((foodItem) {
+        itemCount: foodList.length,
+        itemBuilder: (context, index) {
+          var foodItem = foodList[index];
           return GestureDetector(
             onTap: () {
               Navigator.push(
@@ -278,21 +253,31 @@ class _FoodMainPageState extends State<FoodMainPage> {
                 ),
               );
             },
-            child: SizedBox(
-              width: 180,
+            child: Container(
+              margin: const EdgeInsets.only(
+                  right: 10), // Adds spacing between the items
+              width: 180, // Fixes the width of each item
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Stack(
                     children: [
                       Container(
+                        width: double.infinity,
+                        height: 120,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
+                          borderRadius:
+                              BorderRadius.circular(15), // Rounded corners
+                          image: DecorationImage(
+                            image: AssetImage("assets/${foodItem['image']}"),
+                            fit: BoxFit
+                                .cover, // Ensure the image covers the container
+                          ),
                         ),
-                        child: Image.asset("assets/${foodItem['image']}"),
                       ),
                       Positioned(
-                        bottom: 20,
-                        right: 20,
+                        bottom: 10,
+                        right: 10,
                         child: Container(
                           width: 50,
                           height: 30,
@@ -302,46 +287,83 @@ class _FoodMainPageState extends State<FoodMainPage> {
                           ),
                           child: Center(
                             child: Text(
-                              "\₹$price", // Changed to ₹ price
-                              style: const TextStyle(
-                                color: whiteColor,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              "\₹${foodItem['price']}", // Use price from foodItem
+                              style: const TextStyle(color: whiteColor),
                             ),
                           ),
                         ),
                       ),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: Text(
-                            "${foodItem['title']}",
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: Text(
-                          "${foodItem['rating']}",
-                          style: TextStyle(color: Colors.grey[700]),
-                        ),
-                      ),
-                    ],
+                  const SizedBox(height: 5),
+                  Text(
+                    "${foodItem['title']}",
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
             ),
           );
-        }).toList(),
+        },
       ),
+    );
+  }
+
+  // SWITCH VERTICAL LIST
+  _switchVerticalListOnSelectedIndex(int index) {
+    switch (index) {
+      case 0:
+        return _buildVerticalList(PIZZA_POPULAR_LIST);
+      case 1:
+        return _buildVerticalList(PIZZA_SPECIAL_COMBO_LIST);
+      case 2:
+        return _buildVerticalList(BEVERAGE_SPECIAL_LIST);
+    }
+  }
+
+  _buildVerticalList(List foodList) {
+    if (foodList.isEmpty) {
+      return Center(child: Text('No items available.'));
+    }
+
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: foodList.length > 5 ? 5 : foodList.length,
+      itemBuilder: (context, index) {
+        var foodItem = foodList[index];
+        return ListTile(
+          contentPadding: const EdgeInsets.symmetric(vertical: 10),
+          leading: Container(
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(
+                image: AssetImage("assets/${foodItem['image']}"),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          title: Text(
+            "${foodItem['title']}",
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          subtitle: Text("\₹${foodItem['price']}"), // Use price from foodItem
+          trailing: Text(
+            "${foodItem['rating']}",
+            style: TextStyle(color: Colors.grey[700]),
+          ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => FoodDetailPage(data: foodItem),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }

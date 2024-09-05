@@ -15,9 +15,11 @@ class FoodDetailPage extends StatefulWidget {
 
 class _FoodDetailPageState extends State<FoodDetailPage> {
   int _quantity = 1;
-  final int price = 80; // Example price in INR
+  double get price =>
+      double.tryParse(widget.data['price'] ?? '0') ??
+      0; // Fetch price from data map
 
-  int get total => price * _quantity;
+  double get total => price * _quantity;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +77,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
               children: [
                 Icon(Icons.calendar_today, color: primaryColorED6E1B),
                 SizedBox(width: 10),
-                Text("FREE delivery Sunday, October 23 2.00 PM")
+                Text("FREE delivery Sunday")
               ],
             ),
             const SizedBox(height: 15),
@@ -83,7 +85,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
               children: [
                 Icon(Icons.location_on, color: primaryColorED6E1B),
                 SizedBox(width: 10),
-                Text("Deliver to New York 10001")
+                Text("Delivery within 30 min")
               ],
             )
           ],
@@ -180,7 +182,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "₹ $total", // Changed to ₹ symbol and updated total calculation
+              "₹ ${total.toStringAsFixed(2)}", // Updated total calculation
               style: const TextStyle(fontSize: 16),
             ),
             ButtonContainerWidget(
@@ -193,7 +195,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                   CartItem(
                     title: widget.data['title']!,
                     image: widget.data['image']!,
-                    price: price.toDouble(),
+                    price: price, // Use the actual price from the data
                     quantity: _quantity,
                   ),
                 );

@@ -24,13 +24,12 @@ class CartProvider with ChangeNotifier {
   }
 
   void addItem(CartItem item) {
-    final existingItem = _items.firstWhere(
-      (i) => i.title == item.title,
-      orElse: () => CartItem(title: '', image: '', price: 0, quantity: 0),
-    );
-    if (existingItem.title.isNotEmpty) {
-      existingItem.quantity += item.quantity;
+    final existingItemIndex = _items.indexWhere((i) => i.title == item.title);
+    if (existingItemIndex != -1) {
+      // If item already exists, update quantity
+      _items[existingItemIndex].quantity += item.quantity;
     } else {
+      // If item doesn't exist, add new item
       _items.add(item);
     }
     notifyListeners();
