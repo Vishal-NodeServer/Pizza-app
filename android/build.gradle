@@ -1,3 +1,16 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.0.2'  // Ensure the Android Gradle plugin is up-to-date
+        classpath 'com.google.gms:google-services:4.3.15'  // Use a more recent Google services plugin version
+        // Add other dependencies for Firebase Crashlytics or Performance Monitoring if necessary
+    }
+}
+
 allprojects {
     repositories {
         google()
@@ -6,9 +19,11 @@ allprojects {
 }
 
 rootProject.buildDir = "../build"
+
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
+
 subprojects {
     project.evaluationDependsOn(":app")
 }
