@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'screens/splash/splash_screen.dart'; // Update with the correct path Update with the correct path
 import '../screens/main/nav_pages/home/home_category/food/cart_provider.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
 }
 

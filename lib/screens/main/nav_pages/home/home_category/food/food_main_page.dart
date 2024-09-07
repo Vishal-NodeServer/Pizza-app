@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:Pizza_app/data/food_data.dart';
-import 'package:Pizza_app/screens/main/nav_pages/home/home_category/food/food_detail_page.dart';
+import 'package:pizza_app/data/food_data.dart';
+import 'package:pizza_app/screens/main/nav_pages/home/home_category/food/food_detail_page.dart';
 import '../../../../../../theme/style.dart';
 
 class FoodMainPage extends StatefulWidget {

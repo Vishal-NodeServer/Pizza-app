@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:Pizza_app/screens/auth/login_page.dart';
-import 'package:Pizza_app/screens/main/main_screen.dart';
+import 'package:pizza_app/screens/auth/login_page.dart';
+import 'package:pizza_app/screens/main/main_screen.dart';
 import 'package:url_launcher/url_launcher.dart'; // Import the url_launcher package
 
 class ProfilePage extends StatelessWidget {

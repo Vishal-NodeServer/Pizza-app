@@ -1,6 +1,6 @@
 {
-    "name": "food_prime_app",
-    "short_name": "food_prime_app",
+    "name": "pizza_app",
+    "short_name": "pizza_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

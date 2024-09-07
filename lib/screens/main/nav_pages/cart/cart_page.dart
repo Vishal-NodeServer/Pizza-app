@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:Pizza_app/screens/main/nav_pages/home/home_category/food/food_detail_page.dart';
+import 'package:pizza_app/screens/main/nav_pages/home/home_category/food/food_detail_page.dart';
 import 'package:provider/provider.dart';
-import 'package:Pizza_app/screens/main/main_screen.dart';
-import 'package:Pizza_app/theme/style.dart';
+import 'package:pizza_app/screens/main/main_screen.dart';
+import 'package:pizza_app/theme/style.dart';
 import '../home/home_category/food/cart_provider.dart'; // Adjust path as needed
 
 class CartPage extends StatelessWidget {

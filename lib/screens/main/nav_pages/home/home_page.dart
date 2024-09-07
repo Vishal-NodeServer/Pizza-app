@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:Pizza_app/screens/main/nav_pages/home/home_category/food/food_main_page.dart';
+import 'package:pizza_app/screens/main/nav_pages/home/home_category/food/food_main_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:Pizza_app/screens/auth/login_page.dart';
-import 'package:Pizza_app/screens/main/nav_pages/home/home_category/Address.dart'; //import the Address.dart file
+import 'package:pizza_app/screens/auth/login_page.dart';
+import 'package:pizza_app/screens/main/nav_pages/home/home_category/Address.dart'; //import the Address.dart file
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:Pizza_app/screens/auth/sign_up_page.dart';
-import 'package:Pizza_app/screens/main/main_screen.dart';
+import 'package:pizza_app/screens/auth/sign_up_page.dart';
+import 'package:pizza_app/screens/main/main_screen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
