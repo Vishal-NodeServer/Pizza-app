@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pizza_app/screens/auth/sign_up_page.dart';
 import 'package:pizza_app/screens/main/main_screen.dart';
@@ -13,6 +14,7 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>(); // Form key to manage form state
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -76,19 +78,35 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
-                            onPressed: () {
+                            onPressed: () async {
                               if (_formKey.currentState?.validate() ?? false) {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const MainScreen(),
-                                  ),
-                                );
+                                // If form is valid, attempt to log in using Firebase Authentication
+                                try {
+                                  await _auth.signInWithEmailAndPassword(
+                                    email: email.text,
+                                    password: password.text,
+                                  );
+                                  // Navigate to the main screen if login is successful
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const MainScreen(),
+                                    ),
+                                  );
+                                } catch (e) {
+                                  // Show error message if login fails
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(e.toString()),
+                                    ),
+                                  );
+                                }
                               }
                             },
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.white,
-                              backgroundColor: Color.fromARGB(255, 0, 27, 49),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 0, 27, 49),
                               padding: EdgeInsets.symmetric(
                                 vertical:
                                     MediaQuery.of(context).size.height * 0.02,

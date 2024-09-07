@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pizza_app/screens/auth/login_page.dart';
-import 'package:pizza_app/screens/main/nav_pages/home/home_category/Address.dart'; //import the Address.dart file
+import 'package:pizza_app/screens/main/main_screen.dart';
+//import 'package:pizza_app/screens/main/nav_pages/home/home_category/Address.dart'; // Import the Address.dart file
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -95,15 +97,27 @@ class _SignUpPageState extends State<SignUpPage> {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if (_formKey.currentState?.validate() ?? false) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) =>
-                                    AddressForm(), // Navigate to the Address Form
-                              ),
-                            );
+                            try {
+                              // Create user with email and password
+                              await FirebaseAuth.instance
+                                  .createUserWithEmailAndPassword(
+                                email: email.text,
+                                password: password.text,
+                              );
+
+                              // Navigate to the next screen after successful sign-up
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => const MainScreen()),
+                              );
+                            } on FirebaseAuthException catch (e) {
+                              // Handle sign-up error
+                              print("Sign Up Error: ${e.message}");
+                              // Show error message to user if needed
+                            }
                           }
                         },
                         style: ElevatedButton.styleFrom(
