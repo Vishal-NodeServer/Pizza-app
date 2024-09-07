@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "257601890789",
+    "project_id": "database-ad668",
+    "storage_bucket": "database-ad668.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257601890789:android:4861c8d922d5a5e7c8670c",
+        "android_client_info": {
+          "package_name": "com.example.pizza_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYCXfPpyjykDq1POiLmNmUGShc0tQ7Erk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

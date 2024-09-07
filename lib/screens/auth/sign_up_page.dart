@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pizza_app/screens/auth/login_page.dart';
 import 'package:pizza_app/screens/main/nav_pages/home/home_category/Address.dart'; //import the Address.dart file
@@ -15,6 +16,48 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
   final TextEditingController phone = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance; // Firebase Auth instance
+
+  // Method to sign up using Firebase Auth
+  Future<void> _signUpWithEmailAndPassword() async {
+    try {
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: email.text,
+        password: password.text,
+      );
+      // Navigate to Address Form on successful sign-up
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => AddressForm()),
+      );
+    } on FirebaseAuthException catch (e) {
+      // Show error message if sign-up fails
+      if (e.code == 'weak-password') {
+        _showErrorDialog('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        _showErrorDialog('An account already exists for that email.');
+      }
+    } catch (e) {
+      _showErrorDialog('Something went wrong. Please try again.');
+    }
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Error'),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +107,6 @@ class _SignUpPageState extends State<SignUpPage> {
                         if (value == null || value.isEmpty) {
                           return 'Please enter your email';
                         }
-                        // Optionally add more email validation
                         return null;
                       },
                     ),
@@ -95,15 +137,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if (_formKey.currentState?.validate() ?? false) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) =>
-                                    AddressForm(), // Navigate to the Address Form
-                              ),
-                            );
+                            await _signUpWithEmailAndPassword(); // Sign up with email and password
                           }
                         },
                         style: ElevatedButton.styleFrom(
