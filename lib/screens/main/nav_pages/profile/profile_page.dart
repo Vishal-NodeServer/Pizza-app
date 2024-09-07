@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:Pizza_app/screens/auth/login_page.dart';
 import 'package:Pizza_app/screens/main/main_screen.dart';
+import 'package:url_launcher/url_launcher.dart'; // Import the url_launcher package
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -70,10 +71,10 @@ class ProfilePage extends StatelessWidget {
             const SizedBox(height: 20),
             const SizedBox(height: 15),
             _settingsItem(
-              title: "Help",
-              prefixIcon: Icons.help,
+              title: "Call us",
+              prefixIcon: Icons.call_outlined,
               onTap: () {
-                // Action for Help item
+                _makePhoneCall('tel:123456770'); // Initiate the phone call
               },
             ),
             const SizedBox(height: 15),
@@ -92,6 +93,15 @@ class ProfilePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  // Function to initiate a phone call
+  Future<void> _makePhoneCall(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   Widget _settingsItem({

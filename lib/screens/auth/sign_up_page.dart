@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:Pizza_app/screens/auth/login_page.dart';
-// ignore: depend_on_referenced_packages
 import 'package:Pizza_app/screens/main/nav_pages/home/home_category/Address.dart'; //import the Address.dart file
 
 class SignUpPage extends StatefulWidget {
@@ -11,6 +10,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final _formKey = GlobalKey<FormState>(); // Form key to manage form state
   final TextEditingController username = TextEditingController();
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
@@ -35,90 +35,122 @@ class _SignUpPageState extends State<SignUpPage> {
           SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-              child: Column(
-                children: [
-                  const SizedBox(height: 100),
-                  const Text(
-                    "Sign Up",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 20),
-                  _buildTextField(
-                    controller: username,
-                    hintText: "Username",
-                  ),
-                  const SizedBox(height: 20),
-                  _buildTextField(
-                    controller: email,
-                    hintText: "Email",
-                  ),
-                  const SizedBox(height: 20),
-                  _buildTextField(
-                    controller: password,
-                    hintText: "Password",
-                    obscureText: true,
-                  ),
-                  const SizedBox(height: 20),
-                  _buildTextField(
-                    controller: phone,
-                    hintText: "Phone number",
-                  ),
-                  const SizedBox(height: 30),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) =>
-                                AddressForm(), // Navigate to the Address Form
-                          ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        backgroundColor: const Color.fromARGB(255, 0, 56, 102),
-                        padding: const EdgeInsets.symmetric(vertical: 15),
-                        textStyle: const TextStyle(fontSize: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: const Text("Sign Up"),
+              child: Form(
+                key: _formKey, // Assign the form key
+                child: Column(
+                  children: [
+                    const SizedBox(height: 100),
+                    const Text(
+                      "Sign Up",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "Already have an account? ",
-                        style: TextStyle(fontSize: 15, color: Colors.black),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => const LoginPage(),
-                            ),
-                            (route) => false,
-                          );
+                    const SizedBox(height: 20),
+                    _buildTextField(
+                      controller: username,
+                      hintText: "Username",
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your username';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    _buildTextField(
+                      controller: email,
+                      hintText: "Email",
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your email';
+                        }
+                        // Optionally add more email validation
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    _buildTextField(
+                      controller: password,
+                      hintText: "Password",
+                      obscureText: true,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your password';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    _buildTextField(
+                      controller: phone,
+                      hintText: "Phone number",
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your phone number';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 30),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState?.validate() ?? false) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) =>
+                                    AddressForm(), // Navigate to the Address Form
+                              ),
+                            );
+                          }
                         },
-                        child: const Text(
-                          "Log In",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold, //bold text
-                            color: Color.fromARGB(255, 0, 0, 0),
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor:
+                              const Color.fromARGB(255, 0, 56, 102),
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          textStyle: const TextStyle(fontSize: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
                           ),
                         ),
+                        child: const Text("Sign Up"),
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                ],
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Already have an account? ",
+                          style: TextStyle(fontSize: 15, color: Colors.black),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const LoginPage(),
+                              ),
+                              (route) => false,
+                            );
+                          },
+                          child: const Text(
+                            "Log In",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold, // bold text
+                              color: Color.fromARGB(255, 0, 0, 0),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                  ],
+                ),
               ),
             ),
           ),
@@ -131,8 +163,9 @@ class _SignUpPageState extends State<SignUpPage> {
     required TextEditingController controller,
     required String hintText,
     bool obscureText = false,
+    required FormFieldValidator<String> validator, // Add validator parameter
   }) {
-    return TextField(
+    return TextFormField(
       controller: controller,
       obscureText: obscureText,
       decoration: InputDecoration(
@@ -141,6 +174,7 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
         hintText: hintText,
       ),
+      validator: validator, // Assign validator function
     );
   }
 }

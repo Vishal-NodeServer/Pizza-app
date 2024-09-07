@@ -27,19 +27,6 @@ class CartPage extends StatelessWidget {
         print("Total unique items selected: ${cartItems.length}");
 
         return Scaffold(
-          appBar: AppBar(
-            backgroundColor: whiteColor,
-            title: Image.asset("assets/loggo.png"),
-            leading: IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MainScreen()),
-                );
-              },
-              icon: const Icon(Icons.arrow_back_ios),
-            ),
-          ),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Column(
