@@ -136,8 +136,8 @@ class _FoodMainPageState extends State<FoodMainPage> {
         );
       case 2:
         return _buildFoodList(
-          PIZZA_SPECIAL_COMBO_LIST,
-          deliveryFee: 50,
+          BEVERAGE_SPECIAL_LIST,
+          deliveryFee: 100,
           deliveryTime: "20 - 40 min",
         );
     }
