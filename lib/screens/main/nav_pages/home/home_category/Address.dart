@@ -1,8 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pizza_app/screens/auth/sign_up_page.dart'; // Import the SignUpPage
 import 'package:pizza_app/screens/main/main_screen.dart'; // Import main page
 
 class AddressForm extends StatefulWidget {
+  TextEditingController username = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passController = TextEditingController();
+
+  AddressForm(
+      {required this.username,
+      required this.emailController,
+      required this.passController});
+
   @override
   _AddressFormState createState() => _AddressFormState();
 }
@@ -11,12 +22,52 @@ class _AddressFormState extends State<AddressForm> {
   final _formKey = GlobalKey<FormState>();
 
   // Controllers to get input values
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
-  final TextEditingController _streetController = TextEditingController();
-  final TextEditingController _cityController = TextEditingController();
-  final TextEditingController _stateController = TextEditingController();
-  final TextEditingController _postalCodeController = TextEditingController();
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _phoneController = TextEditingController();
+  TextEditingController _streetController = TextEditingController();
+  TextEditingController _cityController = TextEditingController();
+  TextEditingController _stateController = TextEditingController();
+  TextEditingController _postalCodeController = TextEditingController();
+  String? email;
+  String? pass;
+  Future<void> mysing(
+      {String? email,
+      pass,
+      name,
+      phone,
+      street,
+      city,
+      state,
+      postalcode}) async {
+    UserCredential usercredential = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email!, password: pass);
+    User user = usercredential.user!;
+    await FirebaseFirestore.instance.collection('Data').doc(user.uid).set({
+      'Name': name,
+      'Email': email,
+      'Phone': phone,
+      'Street': street,
+      'City': city,
+      'State': state,
+      'PostalCode': postalcode
+    });
+
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (_) => MainScreen()),
+      (route) => false,
+    );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    email = widget.emailController.text.toString();
+    pass = widget.passController.text.toString();
+    print('Email = $email');
+    print('pass = $pass');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,25 +166,29 @@ class _AddressFormState extends State<AddressForm> {
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               // Process the input data
-                              final addressData = {
-                                'name': _nameController.text,
-                                'phone': _phoneController.text,
-                                'street': _streetController.text,
-                                'city': _cityController.text,
-                                'state': _stateController.text,
-                                'postalCode': _postalCodeController.text,
-                              };
+                              // final addressData = {
+                              //   'name': _nameController.text,
+                              //   'phone': _phoneController.text,
+                              //   'street': _streetController.text,
+                              //   'city': _cityController.text,
+                              //   'state': _stateController.text,
+                              //   'postalCode': _postalCodeController.text,
+                              // };
 
                               // For now, print the data to the console
-                              print('Address Data: $addressData');
+                              // print('Address Data: $addressData');
 
+                              mysing(
+                                  email: email,
+                                  city: _cityController.text.toString(),
+                                  name: _nameController.text.toString(),
+                                  pass: pass,
+                                  phone: _phoneController.text.toString(),
+                                  postalcode:
+                                      _postalCodeController.text.toString(),
+                                  street: _streetController.text.toString(),
+                                  state: _stateController.text.toString());
                               // Navigate to the MainScreen
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => const MainScreen()),
-                                (route) => false,
-                              );
                             }
                           },
                           style: ElevatedButton.styleFrom(

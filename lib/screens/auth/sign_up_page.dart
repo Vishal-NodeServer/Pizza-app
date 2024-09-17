@@ -18,30 +18,30 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController phone = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance; // Firebase Auth instance
 
-  // Method to sign up using Firebase Auth
-  Future<void> _signUpWithEmailAndPassword() async {
-    try {
-      UserCredential userCredential =
-          await _auth.createUserWithEmailAndPassword(
-        email: email.text,
-        password: password.text,
-      );
-      // Navigate to Address Form on successful sign-up
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => AddressForm()),
-      );
-    } on FirebaseAuthException catch (e) {
-      // Show error message if sign-up fails
-      if (e.code == 'weak-password') {
-        _showErrorDialog('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        _showErrorDialog('An account already exists for that email.');
-      }
-    } catch (e) {
-      _showErrorDialog('Something went wrong. Please try again.');
-    }
-  }
+  // // Method to sign up using Firebase Auth
+  // Future<void> _signUpWithEmailAndPassword() async {
+  //   try {
+  //     UserCredential userCredential =
+  //         await _auth.createUserWithEmailAndPassword(
+  //       email: email.text,
+  //       password: password.text,
+  //     );
+  //     // Navigate to Address Form on successful sign-up
+  //     Navigator.push(
+  //       context,
+  //       MaterialPageRoute(builder: (_) => AddressForm(username: username,emailController: email,passController: password,)),
+  //     );
+  //   } on FirebaseAuthException catch (e) {
+  //     // Show error message if sign-up fails
+  //     if (e.code == 'weak-password') {
+  //       _showErrorDialog('The password provided is too weak.');
+  //     } else if (e.code == 'email-already-in-use') {
+  //       _showErrorDialog('An account already exists for that email.');
+  //     }
+  //   } catch (e) {
+  //     _showErrorDialog('Something went wrong. Please try again.');
+  //   }
+  // }
 
   void _showErrorDialog(String message) {
     showDialog(
@@ -137,10 +137,19 @@ class _SignUpPageState extends State<SignUpPage> {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () async {
-                          if (_formKey.currentState?.validate() ?? false) {
-                            await _signUpWithEmailAndPassword(); // Sign up with email and password
-                          }
+                        onPressed: () {
+                          // if (_formKey.currentState?.validate() ?? false) {
+                          //   await _signUpWithEmailAndPassword(); // Sign up with email and password
+                          // }
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => AddressForm(
+                                      username: username,
+                                      emailController: email,
+                                      passController: password,
+                                    )),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.white,

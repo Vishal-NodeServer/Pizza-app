@@ -23,11 +23,14 @@ class _LoginPageState extends State<LoginPage> {
         email: email.text,
         password: password.text,
       );
+      User user = userCredential.user!;
       // Navigate to MainScreen on successful sign-in
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const MainScreen(),
+          builder: (context) => MainScreen(
+            user: user,
+          ),
         ),
       );
     } on FirebaseAuthException catch (e) {

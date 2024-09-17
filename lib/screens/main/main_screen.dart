@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pizza_app/screens/main/nav_pages/home/home_page.dart';
 
@@ -5,7 +6,8 @@ import 'nav_pages/cart/cart_page.dart';
 import 'nav_pages/profile/profile_page.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  User? user;
+  MainScreen({super.key, this.user});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -49,7 +51,7 @@ class _MainScreenState extends State<MainScreen> {
         }
       case 2:
         {
-          return const ProfilePage();
+          return ProfilePage(user: widget.user!);
         }
     }
   }

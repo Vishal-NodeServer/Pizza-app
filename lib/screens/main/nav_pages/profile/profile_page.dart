@@ -1,11 +1,42 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pizza_app/screens/auth/login_page.dart';
 import 'package:pizza_app/screens/main/main_screen.dart';
 import 'package:url_launcher/url_launcher.dart'; // Import the url_launcher package
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+class ProfilePage extends StatefulWidget {
+  User user;
+  ProfilePage({super.key, required this.user});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  String? name1;
+
+  String? email2;
+  String? phone1;
+  Future<void> loginget() async {
+    var data = await FirebaseFirestore.instance
+        .collection('Data')
+        .doc(widget.user.uid)
+        .get();
+    setState(() {
+      name1 = data['Name'];
+      email2 = data['Email'];
+      phone1 = data['Phone'];
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loginget();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,77 +52,81 @@ class ProfilePage extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const MainScreen()),
+              MaterialPageRoute(builder: (context) => MainScreen()),
             );
           },
           icon: const Icon(Icons.arrow_back),
         ),
       ),
-      body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        child: Column(
-          children: [
-            const Row(
-              children: [
-                Text(
-                  "vishal suthar",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+      body: name1 == null
+          ? Center(child: CircularProgressIndicator())
+          : Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        name1!,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-            const Row(
-              children: [
-                Text(
-                  "vishal123suthar2@gmail.com",
-                  style: TextStyle(
-                    fontSize: 15,
+                  Row(
+                    children: [
+                      Text(
+                        email2!,
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-            const Row(
-              children: [
-                Text(
-                  "12344567890",
-                  style: TextStyle(
-                    fontSize: 15,
+                  Row(
+                    children: [
+                      Text(
+                        phone1!,
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
+                  const SizedBox(height: 10),
+                  Container(
+                    width: double.infinity,
+                    height: 1,
+                    color: Color.fromARGB(255, 233, 228, 228),
+                  ),
+                  const SizedBox(height: 20),
+                  const SizedBox(height: 15),
+                  _settingsItem(
+                    title: "Call us",
+                    prefixIcon: Icons.call_outlined,
+                    onTap: () {
+                      _makePhoneCall(
+                          'tel:123456770'); // Initiate the phone call
+                    },
+                  ),
+                  const SizedBox(height: 15),
+                  _settingsItem(
+                    title: "Log out",
+                    prefixIcon: Icons.logout_outlined,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginPage()),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 15),
+                ],
+              ),
             ),
-            const SizedBox(height: 10),
-            Container(
-              width: double.infinity,
-              height: 1,
-              color: Color.fromARGB(255, 233, 228, 228),
-            ),
-            const SizedBox(height: 20),
-            const SizedBox(height: 15),
-            _settingsItem(
-              title: "Call us",
-              prefixIcon: Icons.call_outlined,
-              onTap: () {
-                _makePhoneCall('tel:123456770'); // Initiate the phone call
-              },
-            ),
-            const SizedBox(height: 15),
-            _settingsItem(
-              title: "Log out",
-              prefixIcon: Icons.logout_outlined,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginPage()),
-                );
-              },
-            ),
-            const SizedBox(height: 15),
-          ],
-        ),
-      ),
     );
   }
 
