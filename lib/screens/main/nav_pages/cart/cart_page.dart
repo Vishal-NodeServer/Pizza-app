@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:pizza_app/screens/main/nav_pages/cart/OrderConfirm.dart';
 import 'package:pizza_app/screens/main/nav_pages/home/home_category/food/food_detail_page.dart';
 import 'package:provider/provider.dart';
 import 'package:pizza_app/screens/main/main_screen.dart';
@@ -13,18 +15,8 @@ class CartPage extends StatelessWidget {
     return Consumer<CartProvider>(
       builder: (context, cartProvider, child) {
         final cartItems = cartProvider.items;
-        final deliveryFee = 50.00; // Define your delivery fee here
-        final total =
-            cartProvider.total + deliveryFee; // Include delivery fee in total
-
-        // Get item titles and quantities
-        final itemDetails =
-            cartItems.map((item) => "${item.title}: ${item.quantity}").toList();
-
-        // Print the item titles and total count to the terminal
-        print(
-            "Selected pizza titles and quantities: ${itemDetails.join(', ')}");
-        print("Total unique items selected: ${cartItems.length}");
+        final deliveryFee = 50.00;
+        final total = cartProvider.total + deliveryFee;
 
         return Scaffold(
           body: Padding(
@@ -76,7 +68,7 @@ class CartPage extends StatelessWidget {
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "₹${deliveryFee.toStringAsFixed(2)}", // Delivery fee
+                      "₹${deliveryFee.toStringAsFixed(2)}",
                       style: const TextStyle(
                           fontSize: 15, fontWeight: FontWeight.bold),
                     ),
@@ -98,7 +90,7 @@ class CartPage extends StatelessWidget {
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "₹${total.toStringAsFixed(2)}", // Total including delivery fee
+                      "₹${total.toStringAsFixed(2)}",
                       style: const TextStyle(
                           fontSize: 15, fontWeight: FontWeight.bold),
                     ),
@@ -107,21 +99,14 @@ class CartPage extends StatelessWidget {
                 const SizedBox(height: 30),
                 ButtonContainerWidget(
                   title: "Checkout",
-                  onTap: () {
-                    // Print cart items and total when checkout is clicked
-                    print("Checkout button clicked!");
-                    print("Items in the cart:");
-                    for (var item in cartItems) {
-                      print(
-                          "Item: ${item.title}, Quantity: ${item.quantity}, Price: ₹${item.price * item.quantity}");
-                    }
-                    print("Delivery Fee: ₹${deliveryFee.toStringAsFixed(2)}");
-                    print("Total Amount: ₹${total.toStringAsFixed(2)}");
+                  onTap: () async {
+                    // Save the cart items to Firestore
+                    await _saveOrderToFirestore(cartItems, total, deliveryFee);
 
-                    // Navigate to the main screen after checkout
+                    // Navigate to OrderConfirmedPage
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => MainScreen()),
+                      MaterialPageRoute(builder: (_) => OrderConfirmedPage()),
                     );
                   },
                   color: Colors.yellow,
@@ -135,14 +120,39 @@ class CartPage extends StatelessWidget {
     );
   }
 
+  Future<void> _saveOrderToFirestore(
+      List<CartItem> cartItems, double total, double deliveryFee) async {
+    // Reference to Firestore collection
+    final orderRef = FirebaseFirestore.instance.collection('Orders').doc();
+
+    // Prepare order data
+    final orderData = {
+      'items': cartItems.map((item) {
+        return {
+          'title': item.title,
+          'quantity': item.quantity,
+          'price': item.price,
+        };
+      }).toList(),
+      'total': total,
+      'deliveryFee': deliveryFee,
+      'orderDate': Timestamp.now(),
+    };
+
+    try {
+      // Add order to Firestore
+      await orderRef.set(orderData);
+      print("Order saved to Firestore");
+    } catch (e) {
+      print("Error saving order: $e");
+    }
+  }
+
   Widget _itemCartWidget({
     required int index,
     required CartItem item,
     required CartProvider cartProvider,
   }) {
-    // Print the title and quantity of each item
-    print("Item: ${item.title}, Quantity: ${item.quantity}");
-
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
@@ -205,7 +215,7 @@ class CartPage extends StatelessWidget {
                 const Text("Times Food"),
                 const SizedBox(height: 5),
                 Text(
-                  "₹${item.price.toStringAsFixed(2)}", // Changed to ₹ symbol
+                  "₹${item.price.toStringAsFixed(2)}",
                   style: const TextStyle(fontWeight: FontWeight.w600),
                 ),
                 Row(
@@ -215,9 +225,6 @@ class CartPage extends StatelessWidget {
                       onTap: () {
                         if (item.quantity > 1) {
                           cartProvider.updateQuantity(index, item.quantity - 1);
-                          // Print the updated item quantity
-                          print(
-                              "Updated ${item.title} quantity: ${item.quantity - 1}");
                         }
                       },
                       child: Container(
@@ -233,14 +240,11 @@ class CartPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 10),
-                    Text("${item.quantity}"), // Display item quantity
+                    Text("${item.quantity}"),
                     const SizedBox(width: 10),
                     GestureDetector(
                       onTap: () {
                         cartProvider.updateQuantity(index, item.quantity + 1);
-                        // Print the updated item quantity
-                        print(
-                            "Updated ${item.title} quantity: ${item.quantity + 1}");
                       },
                       child: Container(
                         width: 30,

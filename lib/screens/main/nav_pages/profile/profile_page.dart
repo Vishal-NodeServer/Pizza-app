@@ -19,6 +19,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   String? email2;
   String? phone1;
+
   Future<void> loginget() async {
     var data = await FirebaseFirestore.instance
         .collection('Data')
