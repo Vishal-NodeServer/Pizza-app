@@ -6,7 +6,7 @@ class OrderConfirmedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Redirect to MainScreen after 1 second
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(Duration(seconds: 2), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => MainScreen()),
